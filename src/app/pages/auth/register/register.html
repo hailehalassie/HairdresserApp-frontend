@@ -5,19 +5,45 @@
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input type="text" id="firstName" formControlName="firstName" />
+      <div *ngIf="isFieldInvalid('firstName')" class="error-message">
+        First Name is required.
+      </div>
     </div>
     <div class="form-group">
       <label for="lastName">Last Name</label>
       <input type="text" id="lastName" formControlName="lastName" />
+      <div *ngIf="isFieldInvalid('lastName')" class="error-message">
+        Last Name is required.
+      </div>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" id="email" formControlName="email" />
+      <div *ngIf="isFieldInvalid('email')" class="error-message">
+        <ng-container *ngIf="registerForm.get('email')?.hasError('required')">
+          Email is required.
+        </ng-container>
+        <ng-container *ngIf="registerForm.get('email')?.hasError('email')">
+          Enter a valid email.
+        </ng-container>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" formControlName="password" />
+      <div *ngIf="isFieldInvalid('password')" class="error-message">
+        <ng-container
+          *ngIf="registerForm.get('password')?.hasError('required')"
+        >
+          Password is required.
+        </ng-container>
+        <ng-container
+          *ngIf="registerForm.get('password')?.hasError('minlength')"
+        >
+          Password must be at least 6 characters.
+        </ng-container>
+      </div>
     </div>
 
     <div class="form-group">
@@ -26,6 +52,9 @@
         <option value="Customer">Customer</option>
         <option value="Barber">Barber</option>
       </select>
+      <div *ngIf="isFieldInvalid('role')" class="error-message">
+        Role is required.
+      </div>
     </div>
 
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

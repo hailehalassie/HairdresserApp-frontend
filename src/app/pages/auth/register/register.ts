@@ -35,6 +35,11 @@ export class Register {
     });
   }
 
+  isFieldInvalid(field: string): boolean {
+    const control = this.registerForm.get(field);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+
   onSubmit() {
     if (this.registerForm.valid) {
       this.auth.register(this.registerForm.value).subscribe({
