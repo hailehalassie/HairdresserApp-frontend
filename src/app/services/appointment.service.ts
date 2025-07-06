@@ -22,4 +22,16 @@ export class AppointmentService {
       `${this.baseUrl}/customer/${customerId}`
     );
   }
+
+  getCreateAppointmentFormData(): Observable<any> {
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.baseUrl}/create-form-data`);
+  }
+
+  createAppointment(data: any): Observable<any> {
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post('${this.baseUrl}/create', data);
+  }
 }

@@ -1,0 +1,25 @@
+<h2>Create Appointment</h2>
+
+<form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+  <label for="service">Service</label>
+  <select formControlName="serviceId">
+    <option *ngFor="let service of services" [value]="service.id">
+      {{ service.name }}
+    </option>
+  </select>
+
+  <label for="barber">Barber</label>
+  <select formControlName="barberId">
+    <option *ngFor="let barber of barbers" [value]="barber.id">
+      {{ barber.name }}
+    </option>
+  </select>
+
+  <label for="start">Start Time</label>
+  <input type="datetime-local" formControlName="startTime" />
+
+  <label for="end">End Time</label>
+  <input type="datetime-local" formControlName="endTime" />
+
+  <button type="submit" [disabled]="appointmentForm.invalid">Create</button>
+</form>
