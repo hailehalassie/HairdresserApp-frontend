@@ -1,13 +1,24 @@
-<div class="dashboard-container">
-  <h2>Welcome, {{ role }}</h2>
+<h2>Your Appointments</h2>
 
-  <ng-container *ngIf="role === 'Customer'">
-    <p>Here are your upcoming appointments:</p>
-    <!-- Later: Appointment list for customer -->
-  </ng-container>
+<table *ngIf="appointments.length > 0">
+  <thead>
+    <tr>
+      <th>Start</th>
+      <th>End</th>
+      <th>Service</th>
+      <th *ngIf="role === 'Barber'">Customer</th>
+      <th *ngIf="role === 'Customer'">Barber</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let appt of appointments">
+      <td>{{ appt.startTime | date : "short" }}</td>
+      <td>{{ appt.endTime | date : "short" }}</td>
+      <td>{{ appt.serviceName }}</td>
+      <td *ngIf="role === 'Barber'">{{ appt.customerName }}</td>
+      <td *ngIf="role === 'Customer'">{{ appt.barberName }}</td>
+    </tr>
+  </tbody>
+</table>
 
-  <ng-container *ngIf="role === 'Barber'">
-    <p>Here is your schedule:</p>
-    <!-- Later: Appointment list for barber -->
-  </ng-container>
-</div>
+<p *ngIf="appointments.length === 0">No appointments found.</p>

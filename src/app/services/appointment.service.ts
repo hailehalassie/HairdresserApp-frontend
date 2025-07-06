@@ -1,0 +1,25 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Appointment } from '../models/appointment.model';
+
+@Injectable({ providedIn: 'root' })
+export class AppointmentService {
+  private baseUrl = 'http://localhost:5144/api/appointments';
+
+  constructor(private http: HttpClient) {}
+
+  getAppointmentsForBarber(barberId: string): Observable<Appointment[]> {
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Appointment[]>(`${this.baseUrl}/barber/${barberId}`);
+  }
+
+  getAppointmentsForCustomer(customerId: string): Observable<Appointment[]> {
+    // const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Appointment[]>(
+      `${this.baseUrl}/customer/${customerId}`
+    );
+  }
+}
