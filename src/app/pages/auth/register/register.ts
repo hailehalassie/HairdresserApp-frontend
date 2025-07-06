@@ -8,12 +8,13 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { last } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -24,7 +25,8 @@ export class Register {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar // Inject MatSnackBar for notifications
   ) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -44,14 +46,26 @@ export class Register {
     if (this.registerForm.valid) {
       this.auth.register(this.registerForm.value).subscribe({
         next: (res) => {
-          console.log('Register success:', res);
+          this.snackBar.open('Registration successful!', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-success'],
+          }); // Use Angular Material styles)
           this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Register failed:', err);
-          this.errorMessage = 'Registration failed. Try again.';
+          this.snackBar.open(
+            'Registration failed. Please try again.',
+            'Close',
+            {
+              duration: 3000,
+              panelClass: ['snackbar-error'],
+            }
+          ); // Use Angular Material styles
         },
       });
+    } else {
+      this.errorMessage = 'Please fill out the form correctly.';
     }
   }
 }

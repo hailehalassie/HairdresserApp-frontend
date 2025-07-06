@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* These apply to all snackbars using our custom overlay class */
+.custom-snackbar-theme .mat-mdc-snack-bar-container.snackbar-success {
+  background-color: #4caf50 !important;
+  color: #4caf50 !important;
+}
+
+.custom-snackbar-theme .mat-mdc-snack-bar-container.snackbar-error {
+  background-color: #f44336 !important;
+  color: #f44336 !important;
+}
+
+.custom-snackbar-theme .mat-mdc-snack-bar-container .mdc-button__label {
+  color: white !important; // make close button white
+}
