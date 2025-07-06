@@ -1,1 +1,13 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <h2>Welcome, {{ role }}</h2>
+
+  <ng-container *ngIf="role === 'Customer'">
+    <p>Here are your upcoming appointments:</p>
+    <!-- Later: Appointment list for customer -->
+  </ng-container>
+
+  <ng-container *ngIf="role === 'Barber'">
+    <p>Here is your schedule:</p>
+    <!-- Later: Appointment list for barber -->
+  </ng-container>
+</div>
