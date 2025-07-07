@@ -30,8 +30,6 @@ export class AppointmentService {
   }
 
   createAppointment(data: any): Observable<any> {
-    // const token = localStorage.getItem('token');
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post('${this.baseUrl}/create', data);
+    return this.http.post(`${this.baseUrl}/create`, data);
   }
 }
