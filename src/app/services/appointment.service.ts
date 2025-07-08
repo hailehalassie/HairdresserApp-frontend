@@ -32,4 +32,8 @@ export class AppointmentService {
   createAppointment(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/create`, data);
   }
+
+  cancelAppointment(appointmentId: string): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/cancel/${appointmentId}`, {});
+  }
 }

@@ -17,6 +17,16 @@
       <td>{{ appt.serviceName }}</td>
       <td *ngIf="role === 'Barber'">{{ appt.customerName }}</td>
       <td *ngIf="role === 'Customer'">{{ appt.barberName }}</td>
+      <td>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="cancelAppointment(appt.id)"
+          class="cancel-button"
+        >
+          Cancel
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
