@@ -1,4 +1,4 @@
-<h2>Create Appointment</h2>
+<!-- <h2>Create Appointment</h2>
 
 <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
   <label for="service">Service</label>
@@ -22,4 +22,65 @@
   <input type="datetime-local" formControlName="endTime" />
 
   <button type="submit" [disabled]="appointmentForm.invalid">Create</button>
-</form>
+</form> -->
+
+<mat-card class="create-container">
+  <h2>Create Appointment</h2>
+
+  <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+    <!-- Service -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Service</mat-label>
+      <mat-select formControlName="serviceId">
+        <mat-option *ngFor="let service of services" [value]="service.id">
+          {{ service.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="isFieldInvalid('serviceId')"
+        >Service is required</mat-error
+      >
+    </mat-form-field>
+
+    <!-- Barber -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Barber</mat-label>
+      <mat-select formControlName="barberId">
+        <mat-option *ngFor="let barber of barbers" [value]="barber.id">
+          {{ barber.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="isFieldInvalid('barberId')"
+        >Barber is required</mat-error
+      >
+    </mat-form-field>
+
+    <!-- Start Time -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Start Time</mat-label>
+      <input matInput type="datetime-local" formControlName="startTime" />
+      <mat-error *ngIf="isFieldInvalid('startTime')"
+        >Start time is required</mat-error
+      >
+    </mat-form-field>
+
+    <!-- End Time -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>End Time</mat-label>
+      <input matInput type="datetime-local" formControlName="endTime" />
+      <mat-error *ngIf="isFieldInvalid('endTime')"
+        >End time is required</mat-error
+      >
+    </mat-form-field>
+
+    <!-- Submit -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="appointmentForm.invalid"
+      class="submit-button"
+    >
+      Create
+    </button>
+  </form>
+</mat-card>

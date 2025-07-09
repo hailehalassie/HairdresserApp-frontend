@@ -9,11 +9,25 @@ import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../services/appointment.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatSnackBarModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+  ],
   templateUrl: './create.html',
   styleUrl: './create.scss',
 })
@@ -34,6 +48,10 @@ export class CreateAppointment implements OnInit {
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
     });
+  }
+  isFieldInvalid(field: string): boolean {
+    const control = this.appointmentForm.get(field);
+    return !!(control && control.invalid && (control.dirty || control.touched));
   }
 
   ngOnInit() {
