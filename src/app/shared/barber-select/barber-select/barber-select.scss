@@ -1,0 +1,31 @@
+.barber-select-container {
+  margin-bottom: 16px;
+
+  label {
+    color: #f5f5f5;
+    margin-right: 8px;
+  }
+
+  select {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    border: 1px solid #444;
+    padding: 6px;
+    border-radius: 4px;
+  }
+
+  option {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+  }
+}
+
+.barber-select-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.barber-select-field {
+  width: 300px;
+}

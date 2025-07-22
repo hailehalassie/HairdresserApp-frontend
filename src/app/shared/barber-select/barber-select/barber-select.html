@@ -1,0 +1,32 @@
+<!-- <div class="barber-select-container">
+  <label for="barber">Select a Barber:</label>
+  <select
+    [(ngModel)]="selectedBarberId"
+    (change)="onBarberChange()"
+    id="barber"
+  >
+    <option value="" disabled selected>Select...</option>
+    <option *ngFor="let barber of barbers" [value]="barber.id">
+      {{ barber.name }}
+    </option>
+  </select>
+</div> -->
+
+<!-- <mat-form-field appearance="fill">
+  <mat-label>Select Barber</mat-label>
+  <mat-select (selectionChange)="onBarberChange()">
+    <mat-option *ngFor="let barber of barbers" [value]="barber.id">
+      {{ barber.fullName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
+<div class="barber-select-wrapper">
+  <mat-form-field appearance="fill" class="barber-select-field">
+    <mat-label>Select Barber</mat-label>
+    <mat-select (selectionChange)="onBarberChange($event.value)">
+      <mat-option *ngFor="let barber of barbers" [value]="barber.id">
+        {{ barber.fullName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

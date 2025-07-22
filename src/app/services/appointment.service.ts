@@ -36,4 +36,9 @@ export class AppointmentService {
   cancelAppointment(appointmentId: string): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/cancel/${appointmentId}`, {});
   }
+
+  // getTimetable(
+  //   barberId: string,
+  //   date: string
+  // ): Observable<GetBarbersTimetableResponse>;
 }

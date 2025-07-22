@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
 import { getDecodedToken } from '../../services/token.util';
+import { BarberSelectComponent } from '../../shared/barber-select/barber-select/barber-select';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,76 +20,17 @@ import { getDecodedToken } from '../../services/token.util';
     MatDialogModule,
     MatTableModule,
     MatCardModule,
+    BarberSelectComponent,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
-// export class Dashboard {
-//   appointments: Appointment[] = [];
-//   role: string = '';
-
-//   constructor(
-//     private appointmentService: AppointmentService,
-//     private snackBar: MatSnackBar,
-//     private dialog: MatDialog
-//   ) {}
-
-//   ngOnInit(): void {
-//     const decodedToken = getDecodedToken();
-//     if (!decodedToken) return;
-
-//     this.role = decodedToken.role;
-
-//     if (this.role === 'Barber') {
-//       this.appointmentService
-//         .getAppointmentsForBarber(decodedToken.nameid)
-//         .subscribe({
-//           next: (data) => (this.appointments = data),
-//         });
-//     } else if (this.role === 'Customer') {
-//       this.appointmentService
-//         .getAppointmentsForCustomer(decodedToken.nameid)
-//         .subscribe({
-//           next: (data) => (this.appointments = data),
-//         });
-//     }
-//   }
-
-//   cancelAppointment(id: string) {
-//     const dialogRef = this.dialog.open(ConfirmDialog, {
-//       data: { message: 'Are you sure you want to cancel this appointment?' },
-//     });
-//     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-//       if (confirmed) {
-//         this.appointmentService.cancelAppointment(id).subscribe({
-//           next: () => {
-//             this.snackBar.open('Appointment cancelled successfully', 'Close', {
-//               duration: 3000,
-//               panelClass: ['snackbar-success'],
-//             });
-//             const decodedToken = getDecodedToken();
-//             if (!decodedToken) return;
-//             this.appointmentService
-//               .getAppointmentsForCustomer(decodedToken.nameid)
-//               .subscribe({
-//                 next: (data) => (this.appointments = data),
-//               });
-//           },
-//           error: () => {
-//             this.snackBar.open('Failed to cancel appointment', 'Close', {
-//               duration: 3000,
-//               panelClass: ['snackbar-error'],
-//             });
-//           },
-//         });
-//       }
-//     });
-//   }
-// }
 export class Dashboard {
   appointments: Appointment[] = [];
   role: string = '';
   displayedColumns: string[] = [];
+  services: any[] = [];
+  barbers: any[] = [];
 
   constructor(
     private appointmentService: AppointmentService,
@@ -162,5 +104,10 @@ export class Dashboard {
     serviceCall.subscribe({
       next: (data) => (this.appointments = data),
     });
+  }
+
+  onBarberSelected(barberId: string) {
+    console.log('Selected Barber:', barberId);
+    // You can now call timetableService.getBarberTimetable(barberId, selectedDate)
   }
 }
