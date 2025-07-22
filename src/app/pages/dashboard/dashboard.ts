@@ -106,8 +106,22 @@ export class Dashboard {
     });
   }
 
+  // onBarberSelected(barberId: string) {
+  //   console.log('Selected Barber:', barberId);
+  //   // You can now call timetableService.getBarberTimetable(barberId, selectedDate)
+  // }
+
   onBarberSelected(barberId: string) {
-    console.log('Selected Barber:', barberId);
-    // You can now call timetableService.getBarberTimetable(barberId, selectedDate)
+    const today = new Date().toISOString(); // or format to 'yyyy-MM-dd' if backend expects just the date
+
+    this.appointmentService.getBarberTimetable(barberId, today).subscribe({
+      next: (response) => {
+        console.log('Timetable:', response);
+        // Store in property to show calendar later
+      },
+      error: (err) => {
+        console.error('Failed to load timetable:', err);
+      },
+    });
   }
 }

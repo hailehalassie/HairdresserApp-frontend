@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Appointment } from '../models/appointment.model';
+import { GetBarbersTimetableResponse } from '../models/timetable.model';
 
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
@@ -37,8 +38,12 @@ export class AppointmentService {
     return this.http.put<void>(`${this.baseUrl}/cancel/${appointmentId}`, {});
   }
 
-  // getTimetable(
-  //   barberId: string,
-  //   date: string
-  // ): Observable<GetBarbersTimetableResponse>;
+  getBarberTimetable(
+    barberId: string,
+    date: string
+  ): Observable<GetBarbersTimetableResponse> {
+    return this.http.get<GetBarbersTimetableResponse>(
+      `${this.baseUrl}/barber-timetable/${barberId}/${date}`
+    );
+  }
 }
